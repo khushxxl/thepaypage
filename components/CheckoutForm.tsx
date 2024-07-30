@@ -29,13 +29,12 @@ const CheckoutForm = ({
       fetch("/api/create-payment-intent", {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${apiKey}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ amount: convertToSubcurrency(amount) }),
       })
         .then((res) => res.json())
-        .then((data) => setClientSecret(data.clientSecret));
+        .then((data) => setClientSecret(data?.clientSecret));
     } catch (error) {
       console.log(error);
     }

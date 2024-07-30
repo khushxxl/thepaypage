@@ -100,20 +100,20 @@ function EditorArea() {
                   </span>{" "}
                   for actual preview
                 </p>
-                {/* <Elements
-                    stripe={stripePromise}
-                    options={{
-                      mode: "payment",
-                      amount: convertToSubcurrency(amount),
-                      currency: "usd",
-                    }}
-                  >
-                    <CheckoutForm
-                      apiKey={selectedProject?.stripeSecretKey}
-                      isEditor={true}
-                      amount={amount}
-                    />
-                  </Elements> */}
+                <Elements
+                  stripe={stripePromise}
+                  options={{
+                    mode: "payment",
+                    amount: convertToSubcurrency(amount),
+                    currency: "usd",
+                  }}
+                >
+                  <CheckoutForm
+                    apiKey={selectedProject?.stripeSecretKey}
+                    isEditor={true}
+                    amount={amount}
+                  />
+                </Elements>
               </>
             )
           )}
