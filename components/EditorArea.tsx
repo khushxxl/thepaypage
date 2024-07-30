@@ -18,25 +18,29 @@ function EditorArea() {
   } = React.useContext(AppContext);
   const amount = 49.99;
 
-  const [stripePromise, setStripePromise] =
-    useState<Promise<Stripe | null> | null>(null);
+  // const [stripePromise, setStripePromise] =
+  //   useState<Promise<Stripe | null> | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const loadStripeInstance = async () => {
-      try {
-        if (selectedProject?.stripePublicKey) {
-          const stripe = await loadStripe(selectedProject.stripePublicKey);
-          setStripePromise(stripe ? Promise.resolve(stripe) : null);
-        }
-      } catch (err) {
-        setError("Invalid Stripe API key or network error.");
-        console.error(err);
-      }
-    };
+  // useEffect(() => {
+  //   const loadStripeInstance = async () => {
+  //     try {
+  //       if (selectedProject?.stripePublicKey) {
+  //         const stripe = await loadStripe(selectedProject.stripePublicKey);
+  //         setStripePromise(stripe ? Promise.resolve(stripe) : null);
+  //       }
+  //     } catch (err) {
+  //       setError("Invalid Stripe API key or network error.");
+  //       console.error(err);
+  //     }
+  //   };
 
-    loadStripeInstance();
-  }, [selectedProject]);
+  //   loadStripeInstance();
+  // }, [selectedProject]);
+
+  const stripePromise = loadStripe(
+    "pk_test_51PhlYaCRmGYjmhYknvmoWqVEvQsndGH1eBtgfZliaJyBsQWOjcOXLL6WXkpvEPPH5OkclqQRRianGFYwP5nepciI00EfRXPnjJ"
+  );
 
   return (
     <div
