@@ -61,17 +61,19 @@ function EditorArea() {
               selectedProject &&
               stripePromise &&
               !error && (
-                <></>
-                // <Elements
-                //   stripe={stripePromise}
-                //   options={{
-                //     mode: "payment",
-                //     amount: convertToSubcurrency(amount),
-                //     currency: "usd",
-                //   }}
-                // >
-                //   <CheckoutForm isEditor={true} amount={amount} />
-                // </Elements>
+                // <></>
+                <>
+                  <Elements
+                    stripe={stripePromise}
+                    options={{
+                      mode: "payment",
+                      amount: convertToSubcurrency(amount),
+                      currency: "usd",
+                    }}
+                  >
+                    <CheckoutForm isEditor={true} amount={amount} />
+                  </Elements>
+                </>
               )
             )}
           </div>
