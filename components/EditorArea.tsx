@@ -71,7 +71,11 @@ function EditorArea() {
                       currency: "usd",
                     }}
                   >
-                    <CheckoutForm isEditor={true} amount={amount} />
+                    <CheckoutForm
+                      apiKey={selectedProject?.stripeSecretKey}
+                      isEditor={true}
+                      amount={amount}
+                    />
                   </Elements>
                 </>
               )

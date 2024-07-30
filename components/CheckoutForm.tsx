@@ -12,9 +12,11 @@ import { CloudHail } from "lucide-react";
 const CheckoutForm = ({
   amount,
   isEditor,
+  apiKey,
 }: {
   amount: number;
   isEditor: boolean;
+  apiKey: string;
 }) => {
   const stripe = useStripe();
   const elements = useElements();
@@ -28,6 +30,7 @@ const CheckoutForm = ({
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${apiKey}`,
         },
         body: JSON.stringify({ amount: convertToSubcurrency(amount) }),
       })

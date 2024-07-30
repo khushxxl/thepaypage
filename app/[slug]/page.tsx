@@ -55,7 +55,11 @@ function PreviewPage() {
               currency: "usd",
             }}
           >
-            <CheckoutForm isEditor={false} amount={49.99} />
+            <CheckoutForm
+              apiKey={userFound?.stripeSecretKey}
+              isEditor={false}
+              amount={49.99}
+            />
           </Elements>
         </div>
       </div>
