@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  middleware: ["middleware.ts"],
+};
 
 export default nextConfig;
