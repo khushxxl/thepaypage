@@ -29,7 +29,7 @@ const CheckoutForm = ({
       fetch("/api/create-payment-intent", {
         method: "POST",
         headers: {
-          Authorization: `Bearer sk_test_51PhlYaCRmGYjmhYk1qKnkwn1zAK6Ba9FZ52rOsmy3PGbcuofbKzSsXnOHAvDGLIunjPNxVefAIDeMOHCEqXQack600Q7J2IHKM`,
+          Authorization: `Bearer ${apiKey}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ amount: convertToSubcurrency(amount) }),

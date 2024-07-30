@@ -4,10 +4,11 @@ import convertToSubcurrency from "@/lib/convertToSubcurrency";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useSearchParams } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function PreviewPage() {
   const [userFound, setuserFound] = useState<any>();
+  const [postData, setpostData] = useState();
 
   const searchParams = useSearchParams();
   const userId = searchParams.get("clientId");
@@ -25,18 +26,36 @@ function PreviewPage() {
 
   console.log(userId);
 
-  React.useEffect(() => {
-    if (userId) {
-      getUserById(userId)
-        .then((user) => {
-          console.log("User Project=>", user);
-          setuserFound(user);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
-  }, [userId]);
+  // React.useEffect(() => {
+  //   if (userId) {
+
+  //   }
+  // }, [userId]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch("/api/checkout");
+      await response.json().then(async (result) => {
+        const resData = result?.data;
+
+        setpostData(resData);
+
+        if (resData?.id) {
+          await getUserById(resData?.id)
+            .then((user) => {
+              console.log("User Project=>", user);
+              setuserFound(user);
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        }
+      });
+    };
+
+    fetchData();
+  }, []);
+
   if (userFound) {
     const stripePromise = loadStripe(userFound?.stripePublicKey);
 
@@ -57,11 +76,17 @@ function PreviewPage() {
           >
             <CheckoutForm
               apiKey={userFound?.stripeSecretKey}
-              isEditor={false}
+              isEditor={postData?.isPreview ? true : false}
               amount={49.99}
             />
           </Elements>
         </div>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <h1>check</h1>
       </div>
     );
   }

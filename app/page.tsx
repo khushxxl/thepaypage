@@ -1,22 +1,22 @@
 "use client";
-import EditorArea from "@/components/EditorArea";
-import LeftSideBar from "@/components/LeftSideBar";
-import RightBar from "@/components/RightBar";
-import Image from "next/image";
-import { useEffect } from "react";
+import { SignIn, SignInButton, useAuth, useUser } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
+import React, { useEffect } from "react";
 
-export default function Home() {
+function HomePage() {
+  const { isSignedIn } = useUser();
+  const router = useRouter();
+  //   useEffect(() => {
+  //     if (isSignedIn) {
+  //       router.replace("/dashboard");
+  //     }
+  //   }, [isSignedIn]);
+
   return (
-    <main className="grid grid-cols-10">
-      <div className="col-span-2">
-        <LeftSideBar />
-      </div>
-      <div className="col-span-6">
-        <EditorArea />
-      </div>
-      <div className="col-span-2">
-        <RightBar />
-      </div>
-    </main>
+    <div className="flex min-h-screen items-center justify-center">
+      <SignInButton />
+    </div>
   );
 }
+
+export default HomePage;

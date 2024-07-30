@@ -8,7 +8,7 @@ function AppContextProvider({ children }) {
   const [allProjects, setallProjects] = useState([]);
   const [selectedProject, setselectedProject] = useState();
 
-  const [bgColor, setbgColor] = useState("#fff");
+  const [bgColor, setbgColor] = useState("#ffffff");
   return (
     <AppContext.Provider
       value={{

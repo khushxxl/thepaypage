@@ -96,7 +96,7 @@ function RightBar() {
         <RightBarOptionComponent option={"CONFIG"} title={"Config"} />
       </div>
 
-      {rightBarOption == "PROJECT_DETAILS" && (
+      {rightBarOption == "PROJECT_DETAILS" && selectedProject && (
         <div className=" max-w-[300px] w-full  flex items-start justify-start  mt-10">
           <form
             onSubmit={handleUpdateProject}
