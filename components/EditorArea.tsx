@@ -39,7 +39,7 @@ function EditorArea() {
   // }, [selectedProject]);
 
   const stripePromise = loadStripe(
-    "pk_test_51PhlYaCRmGYjmhYknvmoWqVEvQsndGH1eBtgfZliaJyBsQWOjcOXLL6WXkpvEPPH5OkclqQRRianGFYwP5nepciI00EfRXPnjJ"
+    "pk_test_51PfezLFmDqFvsXm8oXniQ3cgd3Q6wCvfxZ5tCrVSWBIOqAuz9CIGH6NrfWPN6JQ4rl5vdTPWT2e813q8VEVIsa9O00q4oSWK1w"
   );
 
   return (
