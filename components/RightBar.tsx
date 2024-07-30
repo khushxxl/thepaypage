@@ -39,19 +39,19 @@ function RightBar() {
     return result;
   }
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     const { name, value } = e.target;
-    setformData((prev) => ({
+    setformData((prev: any) => ({
       ...prev,
       [name]: value,
     }));
-    setselectedProject((prev) => ({
+    setselectedProject((prev: any) => ({
       ...prev,
       [name]: value,
     }));
   };
 
-  const handleUpdateProject = async (e) => {
+  const handleUpdateProject = async (e: any) => {
     e.preventDefault();
     try {
       const updatedProject = await updateProjectById(

@@ -35,7 +35,7 @@ export function CreateProjectDialog() {
 
   const [formData, setformData] = useState(initialData);
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     const value = e.target.value;
     const name = e.target.name;
 
@@ -45,7 +45,7 @@ export function CreateProjectDialog() {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     console.log(formData);
 
@@ -68,7 +68,7 @@ export function CreateProjectDialog() {
     console.log("Project added");
   };
 
-  const handleConffetiClick = (e) => {
+  const handleConffetiClick = (e: any) => {
     e.preventDefault();
     setTimeout(() => {
       setloading(false);
