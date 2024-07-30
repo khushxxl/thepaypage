@@ -8,7 +8,7 @@ import React, { useEffect, useState } from "react";
 
 function PreviewPage() {
   const [userFound, setuserFound] = useState<any>();
-  const [postData, setpostData] = useState();
+  const [postData, setpostData] = useState<any>();
 
   const searchParams = useSearchParams();
   const userId = searchParams.get("clientId");
