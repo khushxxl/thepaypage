@@ -1,7 +1,9 @@
+"use client";
 import EditorArea from "@/components/EditorArea";
 import LeftSideBar from "@/components/LeftSideBar";
 import RightBar from "@/components/RightBar";
 import Image from "next/image";
+import { useEffect } from "react";
 
 export default function Home() {
   return (

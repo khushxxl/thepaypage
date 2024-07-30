@@ -8,7 +8,13 @@ import {
 } from "@stripe/react-stripe-js";
 import convertToSubcurrency from "@/lib/convertToSubcurrency";
 
-const CheckoutForm = ({ amount }: { amount: number }) => {
+const CheckoutForm = ({
+  amount,
+  isEditor,
+}: {
+  amount: number;
+  isEditor: boolean;
+}) => {
   const stripe = useStripe();
   const elements = useElements();
   const [errorMessage, setErrorMessage] = useState<string>();
@@ -88,7 +94,7 @@ const CheckoutForm = ({ amount }: { amount: number }) => {
       {errorMessage && <div>{errorMessage}</div>}
 
       <button
-        disabled={true}
+        disabled={isEditor ? true : false}
         className="text-white w-full p-5 bg-black mt-2 rounded-md font-bold disabled:opacity-50 disabled:animate-pulse"
       >
         {!loading ? `Pay $${amount}` : "Processing..."}
