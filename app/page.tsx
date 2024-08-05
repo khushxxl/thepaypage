@@ -1,20 +1,24 @@
-"use client";
+import Features from "@/components/landingPageComponents/Features";
+import Hero from "@/components/landingPageComponents/Hero";
 import { SignIn, SignInButton, useAuth, useUser } from "@clerk/nextjs";
-import { useRouter } from "next/navigation";
+import Image from "next/image";
+import Link from "next/link";
 import React, { useEffect } from "react";
 
 function HomePage() {
-  const { isSignedIn } = useUser();
-  const router = useRouter();
   //   useEffect(() => {
   //     if (isSignedIn) {
-  //       router.replace("/dashboard");
+  //       router.push("/dashboard");
   //     }
   //   }, [isSignedIn]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center">
-      <SignInButton />
+    <div className="flex min-h-screen flex-col items-center justify-center max-w-[100%]  w-full mx-auto">
+      {/* Hero Section */}
+      <Hero />
+      <Features />
+
+      {/* Features */}
     </div>
   );
 }

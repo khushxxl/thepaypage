@@ -4,11 +4,41 @@ import { AppContext } from "../context/AppContext";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import ColorPicker from "react-pick-color";
+import LeftSideBar from "./LeftSideBar";
+import { gradeintColors } from "@/lib/utils";
+import { MenuIcon } from "lucide-react";
 
 function RightBar() {
-  const { selectedProject, setselectedProject, bgColor, setbgColor } =
-    useContext(AppContext);
+  const {
+    selectedProject,
+    setselectedProject,
+    bgColor,
+    setbgColor,
+    textColorAccent,
+    settextColorAccent,
+    bannerbgColor,
+    setbannerbgColor,
+    hideSideBar,
+    sethideSideBar,
+  } = useContext(AppContext);
   const [formData, setformData] = useState(selectedProject);
+
+  const gradeintColors = [
+    "bg-gradient-to-r from-indigo-200 via-red-200 to-yellow-100",
+    "bg-gradient-to-r from-yellow-100 via-yellow-300 to-yellow-500",
+    "bg-gradient-to-r from-red-200 to-red-600",
+    "bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500",
+    "bg-gradient-to-r from-indigo-200 via-red-200 to-yellow-100",
+    "bg-gradient-to-r from-yellow-100 via-yellow-300 to-yellow-500",
+    "bg-gradient-to-r from-red-200 to-red-600",
+    "bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500",
+    "bg-gradient-to-r from-indigo-200 via-red-200 to-yellow-100",
+    "bg-gradient-to-r from-yellow-100 via-yellow-300 to-yellow-500",
+    "bg-gradient-to-r from-red-200 to-red-600",
+    "bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500",
+    "bg-black",
+    "bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900",
+  ];
 
   useEffect(() => {
     setformData(selectedProject);
@@ -84,8 +114,14 @@ function RightBar() {
     );
   };
   return (
-    <div className="border-l-2  w-full flex items-center  flex-col h-full pl-2 pt-4">
+    <div className="border-2 max-w-[480px] lg:w-full  lg:border-0   flex items-center  flex-col h-full pl-2 pt-4">
       {/* Options  */}
+      {/* <div className="w-full flex justify-start">
+        <MenuIcon
+          onClick={() => sethideSideBar(true)}
+          className=" cursor-pointer"
+        />
+      </div> */}
       <div className="flex items-center text-sm w-full rounded-md max-w-xs justify-evenly mt-5 bg-gray-200 p-3">
         {/* "PROJECT_DETAILS" | "BRANDING" | "CONFIG" */}
         <RightBarOptionComponent
@@ -95,9 +131,8 @@ function RightBar() {
         <RightBarOptionComponent option={"BRANDING"} title={"Branding"} />
         <RightBarOptionComponent option={"CONFIG"} title={"Config"} />
       </div>
-
       {rightBarOption == "PROJECT_DETAILS" && selectedProject && (
-        <div className=" max-w-[300px] w-full  flex items-start justify-start  mt-10">
+        <div className=" max-w-[300px] w-full h-full  flex items-start justify-start  mt-10">
           <form
             onSubmit={handleUpdateProject}
             className="space-y-5 max-w-[280px] w-full"
@@ -126,16 +161,73 @@ function RightBar() {
             </div>
 
             <div className="flex items-center w-full justify-between">
-              <Label>Background Color</Label>
+              <Label htmlFor="textcolor">Text Accent Color</Label>
               <Input
-                value={bgColor}
+                value={textColorAccent}
                 onChange={(e) => {
-                  setbgColor(e.target.value);
+                  console.log(e.target.value);
+                  settextColorAccent(e.target.value);
+                }}
+                type="color"
+                className=" cursor-pointer max-w-[100px]"
+                name="textcolor"
+              />
+            </div>
+
+            <div className="flex items-center w-full justify-between">
+              <Label>Banner Background Color</Label>
+              <Input
+                value={bannerbgColor}
+                onChange={(e) => {
+                  setbannerbgColor(`bg-[${e.target.value}]`);
                 }}
                 type="color"
                 className=" cursor-pointer max-w-[100px]"
                 name="bgColor"
               />
+            </div>
+
+            <div className="">
+              <Label>Banner Gradient Presets</Label>
+              <div className="grid grid-cols-10">
+                {gradeintColors.map((data, i) => {
+                  return (
+                    <div
+                      onClick={() => setbannerbgColor(data)}
+                      className={`h-5 w-5 mt-3 border rounded-lg  cursor-pointer ${data}`}
+                      key={i}
+                    ></div>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className="flex items-center w-full  justify-between">
+              <Label>Background Color</Label>
+              <Input
+                value={bgColor}
+                onChange={(e) => {
+                  setbgColor(`bg-[${e.target.value}]`);
+                }}
+                type="color"
+                className=" cursor-pointer max-w-[100px]"
+                name="bgColor"
+              />
+            </div>
+
+            <div>
+              <Label>Background Gradient Presets</Label>
+              <div className="grid grid-cols-10">
+                {gradeintColors.map((data, i) => {
+                  return (
+                    <div
+                      onClick={() => setbgColor(data)}
+                      className={`h-5 w-5 mt-3 border rounded-lg  cursor-pointer ${data}`}
+                      key={i}
+                    ></div>
+                  );
+                })}
+              </div>
             </div>
 
             <button type="submit" className="border-2 px-2 p-1 text-sm rounded">

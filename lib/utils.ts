@@ -30,3 +30,37 @@ export const codeText = `
     }
   };
 `;
+
+export const gradeintColors = [
+  "bg-gradient-to-r from-indigo-200 via-red-200 to-yellow-100",
+  "bg-gradient-to-r from-yellow-100 via-yellow-300 to-yellow-500",
+  "bg-gradient-to-r from-red-200 to-red-600",
+  "bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500",
+  "bg-gradient-to-r from-indigo-200 via-red-200 to-yellow-100",
+  "bg-gradient-to-r from-yellow-100 via-yellow-300 to-yellow-500",
+  "bg-gradient-to-r from-red-200 to-red-600",
+  "bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500",
+  "bg-gradient-to-r from-indigo-200 via-red-200 to-yellow-100",
+  "bg-gradient-to-r from-yellow-100 via-yellow-300 to-yellow-500",
+  "bg-gradient-to-r from-red-200 to-red-600",
+  "bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500",
+  "bg-black",
+];
+
+export const instructions = [
+  {
+    title: "Create a New Project",
+    desc: "Create a new project by adding your project & stripe details, and boom your page is actually ready!",
+  },
+  {
+    title: "Style your page",
+    desc: "You can do additional styling to your page and integrate your brand colors and text!",
+  },
+  {
+    title: "Copy & Paste",
+    desc: "Just copy the provided POST function in your code and your stripe is working!",
+  },
+];
+
+export const descCopy =
+  "Integrating payments has always been a problem 😮‍💨, now integrate stripe with just few lines of code, no more api calls or code errors! Just that? No. Get a customizable page which you can design with our no-code designer 🪄";

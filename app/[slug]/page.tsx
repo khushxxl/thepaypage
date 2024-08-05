@@ -1,10 +1,17 @@
 "use client";
+import BrandingComponent from "@/components/BrandingComponent";
 import CheckoutForm from "@/components/CheckoutForm";
 import convertToSubcurrency from "@/lib/convertToSubcurrency";
-import { Elements } from "@stripe/react-stripe-js";
+import {
+  Elements,
+  EmbeddedCheckout,
+  EmbeddedCheckoutProvider,
+} from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import { Code } from "lucide-react";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 function PreviewPage() {
   const [userFound, setuserFound] = useState<any>();
@@ -31,6 +38,7 @@ function PreviewPage() {
 
   //   }
   // }, [userId]);
+  const [clientSecret, setClientSecret] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -56,30 +64,61 @@ function PreviewPage() {
     fetchData();
   }, []);
 
-  if (userFound) {
-    const stripePromise = loadStripe(userFound?.stripePublicKey);
+  const fetchClientSecret = useCallback(
+    (stripeSecretKey: any, priceId: any) => {
+      // Create a Checkout Session
+      return fetch("/api/checkout_sessions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          stripeSecretKey,
+          priceId,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => data.clientSecret);
+    },
+    [] // Empty dependency array since fetchClientSecret does not depend on any external state or props
+  );
+  useEffect(() => {
+    if (userFound) {
+      fetchClientSecret(
+        userFound?.stripeSecretKey,
+        "price_1Pigq5CRmGYjmhYk5umwy394"
+      )
+        .then((data) => setClientSecret(data))
+        .catch(console.error);
+    }
+  }, [userFound, fetchClientSecret]);
 
+  const options = { clientSecret };
+
+  if (userFound) {
+    // const stripePromise = loadStripe(userFound?.stripePublicKey);
+
+    const stripePromise = loadStripe(userFound?.stripePublicKey);
     return (
-      <div className="max-w-6xl justify-center items-center min-h-screen pt-24  mx-auto">
-        <h1 className="text-center text-3xl font-bold">{userFound?.title}</h1>
-        <h1 className="text-center text-2xl font-bold mt-4">
-          {userFound?.tagline}
-        </h1>
-        <div className="w-full items-center flex justify-center mt-20">
-          <Elements
-            stripe={stripePromise}
-            options={{
-              mode: "payment",
-              amount: convertToSubcurrency(49.99),
-              currency: "usd",
-            }}
-          >
-            <CheckoutForm
-              apiKey={userFound?.stripeSecretKey}
-              isEditor={postData?.isPreview ? true : false}
-              amount={49.99}
-            />
-          </Elements>
+      <div className=" w-full lg:p-10 bg-gradient-to-r from-indigo-200 via-red-200 to-yellow-100  justify-center items-center">
+        <div className="w-full max-w-5xl mx-auto rounded-xl ">
+          <div className="flex  bg-[#FBE7F3]  text-black border-4 rounded-xl items-center w-full justify-center flex-col  ">
+            <div className="border mt-4 rounded-full bg-white p-3">
+              <Code color="black" />
+            </div>
+            <div className="mt-3">
+              <p className="font-bold text-4xl ">X Growth Guide</p>
+            </div>
+            <div className="mt-3  mb-2">
+              <p className="font-bold text-lg ">100+ tips about growing on X</p>
+            </div>
+          </div>
+          <div className="w-full relative  h-fit rounded-b-lg p-2 bg-white">
+            <EmbeddedCheckoutProvider stripe={stripePromise} options={options}>
+              <EmbeddedCheckout />
+            </EmbeddedCheckoutProvider>
+          </div>
+          <BrandingComponent />
         </div>
       </div>
     );
@@ -93,3 +132,20 @@ function PreviewPage() {
 }
 
 export default PreviewPage;
+
+// {
+//   /* <Elements
+//             stripe={stripePromise}
+//             options={{
+//               mode: "payment",
+//               amount: convertToSubcurrency(49.99),
+//               currency: "usd",
+//             }}
+//           >
+//             <CheckoutForm
+//               apiKey={userFound?.stripeSecretKey}
+//               isEditor={postData?.isPreview ? true : false}
+//               amount={49.99}
+//             />
+//           </Elements> */
+// }

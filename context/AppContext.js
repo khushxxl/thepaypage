@@ -8,7 +8,10 @@ function AppContextProvider({ children }) {
   const [allProjects, setallProjects] = useState([]);
   const [selectedProject, setselectedProject] = useState();
 
-  const [bgColor, setbgColor] = useState("#ffffff");
+  const [hideSideBar, sethideSideBar] = useState(false);
+  const [bgColor, setbgColor] = useState();
+  const [bannerbgColor, setbannerbgColor] = useState("bg-[#FBE7F3]");
+  const [textColorAccent, settextColorAccent] = useState("#111111");
   return (
     <AppContext.Provider
       value={{
@@ -20,6 +23,12 @@ function AppContextProvider({ children }) {
         setselectedProject,
         bgColor,
         setbgColor,
+        textColorAccent,
+        settextColorAccent,
+        bannerbgColor,
+        setbannerbgColor,
+        hideSideBar,
+        sethideSideBar,
       }}
     >
       {children}

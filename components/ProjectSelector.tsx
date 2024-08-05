@@ -14,6 +14,18 @@ import {
 import { usePathname } from "next/navigation";
 import { CreateProjectDialog } from "./CreateProjectDialog";
 import { AppContext } from "@/context/AppContext";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Button } from "./ui/button";
+import { Code } from "lucide-react";
 
 export function ProjectSelector() {
   const { allProjects, setallProjects, selectedProject, setselectedProject } =
@@ -47,28 +59,38 @@ export function ProjectSelector() {
   }, [selectedProject]);
 
   return (
-    <Select>
-      <SelectTrigger className="w-[180px] outline-none focus:outline-none">
-        <SelectValue placeholder="Select a Project" />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectGroup>
-          <SelectLabel>Projects</SelectLabel>
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button className="border-2 hover:bg-white bg-white text-black">
+          {selectedProject ? selectedProject?.title : " Select Project"}
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[500px]  flex flex-col  md:max-w-xl w-full">
+        <div className="grid grid-cols-4 w-full gap-x-5">
           {allProjects?.map((data: any) => (
-            <SelectItem
+            <div
+              className={`p-2 ${
+                selectedProject?._id === data?._id ? "bg-gray-300" : ""
+              } border cursor-pointer flex items-center flex-col rounded-xl p-4 `}
               key={data._id} // Ensure you have a unique key
               onClick={() => {
                 setselectedProject(data);
                 console.log("selected proj", data);
               }}
-              value={data}
             >
-              {data?.title}
-            </SelectItem>
+              <div className="border w-fit rounded-full bg-white p-3">
+                <Code color="black" />
+              </div>
+              <p className="mt-4"> {data?.title}</p>
+            </div>
           ))}
-          <h1>{selectedProject?._id}</h1>
-        </SelectGroup>
-      </SelectContent>
-    </Select>
+        </div>
+        <DialogFooter>
+          <DialogClose>
+            <Button>Close</Button>
+          </DialogClose>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 }

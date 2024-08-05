@@ -30,7 +30,7 @@ function LeftSideBar() {
   }, [setallProjects]);
 
   return (
-    <div className="border-r-2 h-full w-full pl-4 pt-5">
+    <div className="border-r-2 w-full pl-4 pt-5">
       <div>
         {allProjects?.map((data: any) => (
           <div
@@ -47,7 +47,7 @@ function LeftSideBar() {
           </div>
         ))}
       </div>
-      <h1>{selectedProject?._id}</h1>
+      {/* <h1>{selectedProject?._id}</h1> */}
     </div>
   );
 }

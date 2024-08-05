@@ -6,6 +6,8 @@ import { Link2, LinkIcon } from "lucide-react";
 import { AppContext } from "@/context/AppContext";
 import convertToSubcurrency from "@/lib/convertToSubcurrency";
 import { usePathname, useRouter } from "next/navigation";
+import { SignInButton, UserButton, useUser } from "@clerk/nextjs";
+import { ProjectSelector } from "./ProjectSelector";
 
 function Navbar() {
   const { allProjects, setallProjects, selectedProject, setselectedProject } =
@@ -14,6 +16,8 @@ function Navbar() {
   const pathName = usePathname();
 
   const router = useRouter();
+
+  const { user, isSignedIn } = useUser();
   const postData = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -45,13 +49,21 @@ function Navbar() {
 
   if (pathName == "/dashboard") {
     return (
-      <div className="p-3 justify-between flex items-center border-b-2 sticky bg-white top-0">
-        <div className=" flex items-center space-x-3">
-          <Link href={"/"}>
-            <h1 className="text-2xl font-bold text-blue-500 w-fit">stripeme</h1>
+      <div className="p-5 justify-between flex items-center border-b-2 px-10 sticky z-50 bg-white top-0">
+        <div className=" flex items-center space-x-9">
+          <Link className="" href={"/"}>
+            <h1 className="text-2xl cursor-pointer  font-bold  w-fit">
+              💸 thepaypage
+            </h1>
           </Link>
-          <CreateProjectDialog />
+          {pathName == "/dashboard" && (
+            <div className="space-x-4">
+              <CreateProjectDialog />
+              <ProjectSelector />
+            </div>
+          )}
         </div>
+
         {/* 
         <div>
           <Link
@@ -64,11 +76,47 @@ function Navbar() {
           </Link>
         </div> */}
 
-        {selectedProject && (
-          <div onClick={postData}>
+        {selectedProject && pathName == "/dashboard" && (
+          <div
+            className=" border flex items-center space-x-2 p-2 rounded-md cursor-pointer"
+            onClick={postData}
+          >
             <LinkIcon />
+            <p>Preview</p>
           </div>
         )}
+      </div>
+    );
+  }
+
+  if (pathName == "/") {
+    return (
+      <div className="p-5 max-w-6xl mx-auto justify-between flex items-center z-50  sticky bg-white top-0">
+        <div className=" flex items-center space-x-3">
+          <Link className="" href={"/"}>
+            <h1 className="text-2xl cursor-pointer  font-bold  w-fit">
+              💸 thepaypage
+            </h1>
+          </Link>
+        </div>
+
+        <div className="lg:flex items-center space-x-8 hidden">
+          <Link href={""}>
+            <p className="hover:underline">Pricing</p>
+          </Link>
+          <Link href={""}>
+            <p className="hover:underline">How it works?</p>
+          </Link>
+          <Link href={""}>
+            <p className="hover:underline">FAQ</p>
+          </Link>
+        </div>
+        <div className="flex items-center space-x-4">
+          {isSignedIn ? <UserButton /> : <SignInButton />}
+          <Link href={"/dashboard"}>
+            <p className="underline cursor-pointer">Dashboard</p>
+          </Link>
+        </div>
       </div>
     );
   }

@@ -14,7 +14,7 @@ import {
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "stripeme",
+  title: "The Pay Page",
   description: "",
 };
 
