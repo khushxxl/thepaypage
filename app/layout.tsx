@@ -54,20 +54,3 @@ export default function RootLayout({
     </ClerkProvider>
   );
 }
-
-// {/* <meta
-//             name="twitter:card"
-//             content="Create Payment Integration with Beautiful Pages in 3 minutes"
-//           />
-//           {/* <meta name="twitter:site" content="@nytimesbits" /> */}
-//           <meta name="twitter:creator" content="@khushaal_04" />
-//           <meta property="og:url" content="https://thepaypage.vercel.app" />
-//           <meta property="og:title" content="💸 thepaypage" />
-//           <meta
-//             property="og:description"
-//             content="Integrating payments has always been a problem 😮‍💨, now integrate stripe with just few lines of code, no more api calls or code errors! Just that? No. Get a customizable page which you can design with our no-code designer 🪄"
-//           />
-//           <meta
-//             property="og:image"
-//             content="https://i.ibb.co/cx3mN2r/Screenshot-2024-08-05-at-23-11-59.png"
-//           /> */}

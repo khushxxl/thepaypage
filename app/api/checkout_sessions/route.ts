@@ -22,7 +22,10 @@ export async function POST(request: NextRequest) {
       ],
       mode: "payment",
 
-      return_url: `http://localhost:3003/return?session_id={CHECKOUT_SESSION_ID}`,
+      return_url: `http://localhost:3000/return?session_id={CHECKOUT_SESSION_ID}`,
+      metadata: {
+        userId: "",
+      },
     });
 
     return NextResponse.json({ clientSecret: session.client_secret });
