@@ -4,6 +4,8 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import AppContextProvider from "@/context/AppContext";
 import { Toaster } from "react-hot-toast";
+import { Analytics } from "@vercel/analytics/react";
+
 import {
   ClerkProvider,
   SignInButton,
@@ -48,6 +50,7 @@ export default function RootLayout({
             <Navbar />
             {children}
             <Toaster />
+            <Analytics />
           </body>
         </AppContextProvider>
       </html>
