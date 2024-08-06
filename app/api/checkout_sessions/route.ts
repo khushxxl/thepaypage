@@ -20,9 +20,12 @@ export async function POST(request: NextRequest) {
           quantity: 1,
         },
       ],
+      metadata: {
+        user_id: "66a7daa1a659e92f83cdc852",
+      },
       mode: "payment",
 
-      return_url: `http://localhost:3003/return?session_id={CHECKOUT_SESSION_ID}`,
+      return_url: `http://localhost:3000/return?session_id={CHECKOUT_SESSION_ID}`,
     });
 
     return NextResponse.json({ clientSecret: session.client_secret });
@@ -37,17 +40,20 @@ export async function POST(request: NextRequest) {
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    const { stripeSecretKey } = await request.json();
+
     const sessionId = searchParams.get("session_id") || "";
 
-    console.log("StripeKey =>", stripeSecretKey);
-    const stripe = new Stripe(stripeSecretKey, {});
+    const stripe = new Stripe(
+      "sk_test_51PhlYaCRmGYjmhYk1qKnkwn1zAK6Ba9FZ52rOsmy3PGbcuofbKzSsXnOHAvDGLIunjPNxVefAIDeMOHCEqXQack600Q7J2IHKM",
+      {}
+    );
 
     const session = await stripe.checkout.sessions.retrieve(sessionId);
 
     return NextResponse.json({
       status: session.status,
       customer_email: session.customer_details?.email,
+      mongo_id: session.metadata?.user_id,
     });
   } catch (err: any) {
     return NextResponse.json(

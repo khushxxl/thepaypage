@@ -7,27 +7,28 @@ export default function Return() {
   const [status, setStatus] = useState(null);
   const [customerEmail, setCustomerEmail] = useState("");
   const { selectedProject } = useContext(AppContext);
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const sessionId = urlParams.get("session_id");
+  console.log(sessionId);
+  // console.log(selectedProject);
   useEffect(() => {
-    if (selectedProject) {
-      const queryString = window.location.search;
-      const urlParams = new URLSearchParams(queryString);
-      const sessionId = urlParams.get("session_id");
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const sessionId = urlParams.get("session_id");
+    console.log(sessionId);
 
-      fetch(`/api/checkout_sessions?session_id=${sessionId}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          stripeSecretKey: selectedProject?.stripeSecretKey,
-        }),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setStatus(data.status);
-          setCustomerEmail(data.customer_email);
-        });
-    }
+    fetch(`/api/checkout_sessions?session_id=${sessionId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then(async (res) => {
+      const data = await res.json();
+      console.log(data);
+      setCustomerEmail(data?.customer_email);
+      setStatus(data?.status);
+    });
   }, []);
 
   if (status === "open") {
