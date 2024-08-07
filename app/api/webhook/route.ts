@@ -31,7 +31,6 @@ export async function POST(req: Request) {
 
   if (event.type == "checkout.session.completed") {
     console.log("Payment was successfull - From Webhook");
-    s;
 
     const subscription = await stripe.subscriptions.retrieve(
       session.subscription as string
