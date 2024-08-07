@@ -94,13 +94,13 @@ function Navbar() {
       <div className="p-5 max-w-6xl mx-auto justify-between flex items-center z-50  sticky bg-white top-0">
         <div className=" flex items-center space-x-3">
           <Link className="" href={"/"}>
-            <h1 className="text-2xl cursor-pointer  font-bold  w-fit">
+            <h1 className="text-2xl cursor-pointer  font-bold w-fit">
               💸 thepaypage
             </h1>
           </Link>
         </div>
 
-        <div className="lg:flex items-center space-x-8 hidden">
+        {/* <div className="lg:flex items-center space-x-8 hidden">
           <Link href={""}>
             <p className="hover:underline">Pricing</p>
           </Link>
@@ -110,12 +110,9 @@ function Navbar() {
           <Link href={""}>
             <p className="hover:underline">FAQ</p>
           </Link>
-        </div>
+        </div> */}
         <div className="flex items-center space-x-4">
-          {isSignedIn ? <UserButton /> : <SignInButton />}
-          <Link href={"/dashboard"}>
-            <p className="underline cursor-pointer">Dashboard</p>
-          </Link>
+          <p className="cursor-pointer font-mono">Coming Soon</p>
         </div>
       </div>
     );
