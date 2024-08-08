@@ -47,51 +47,6 @@ function Navbar() {
     }
   };
 
-  if (pathName == "/dashboard") {
-    return (
-      <div className="p-5 justify-between flex items-center border-b-2 px-10 sticky z-50 bg-white top-0">
-        <div className=" flex items-center space-x-9">
-          <Link className="" href={"/"}>
-            <h1 className="text-2xl cursor-pointer  font-bold  w-fit">
-              💸 thepaypage
-            </h1>
-          </Link>
-          {pathName == "/dashboard" && (
-            <div className="space-x-4">
-              <CreateProjectDialog />
-              <ProjectSelector />
-            </div>
-          )}
-        </div>
-
-        {/* 
-        <div>
-          <Link
-            target="_blank"
-            href={`/checkoutPayment?clientId=${
-              selectedProject?._id
-            }&isPreview=true&amount=${convertToSubcurrency(49.99).toString()}`}
-          >
-            <LinkIcon />
-          </Link>
-        </div> */}
-
-        <div className="flex items-center space-x-5">
-          {selectedProject && pathName == "/dashboard" && (
-            <div
-              className=" border flex items-center space-x-2 p-2 rounded-md cursor-pointer"
-              onClick={postData}
-            >
-              <LinkIcon />
-              <p>Preview</p>
-            </div>
-          )}
-          <UserButton />
-        </div>
-      </div>
-    );
-  }
-
   if (pathName == "/") {
     return (
       <div className="p-5 max-w-6xl mx-auto justify-between flex items-center z-50  sticky bg-white top-0">
