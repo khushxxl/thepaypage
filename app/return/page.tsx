@@ -16,14 +16,18 @@ export default function Return() {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const sessionId = urlParams.get("session_id");
-    console.log(sessionId);
+    const projectId = urlParams.get("project_id");
+    console.log(projectId);
 
-    fetch(`/api/checkout_sessions?session_id=${sessionId}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then(async (res) => {
+    fetch(
+      `/api/checkout_sessions?session_id=${sessionId}&project_id=${projectId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    ).then(async (res) => {
       const data = await res.json();
       console.log(data);
       setCustomerEmail(data?.customer_email);
@@ -35,10 +39,13 @@ export default function Return() {
     return redirect("/");
   }
 
-  if (status === "complete") {
+  if (status === "paid" || "completed") {
     return (
-      <section id="success">
-        <p>
+      <section
+        className="h-screen flex items-center justify-center"
+        id="success"
+      >
+        <p className="max-w-4xl text-center">
           We appreciate your business! A confirmation email will be sent to{" "}
           {customerEmail}. If you have any questions, please email{" "}
           <a href="mailto:orders@example.com">orders@example.com</a>.

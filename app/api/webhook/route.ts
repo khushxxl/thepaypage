@@ -2,6 +2,8 @@ import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
+const sendPositiveStatus = () => {};
+
 export async function POST(req: Request) {
   const body = await req.text();
 
@@ -29,8 +31,12 @@ export async function POST(req: Request) {
   const session = event.data.object as Stripe.Checkout.Session;
   console.log("Loggin Session", session);
 
-  if (event.type == "checkout.session.completed") {
+  if (event.type == "checkout.session.async_payment_succeeded") {
     console.log("Payment was successfull - From Webhook");
+
+    console.log("hitting consume webhook now");
+
+    // do something here
 
     const subscription = await stripe.subscriptions.retrieve(
       session.subscription as string

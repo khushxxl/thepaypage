@@ -114,14 +114,14 @@ function RightBar() {
     );
   };
   return (
-    <div className="border-2 max-w-[480px] lg:w-full  lg:border-0   flex items-center  flex-col h-full pl-2 pt-4">
+    <div className="max-w-[480px] lg:w-full   flex items-start  flex-col h-full pl-5 pt-4">
       {/* Options  */}
-      {/* <div className="w-full flex justify-start">
+      <div className="w-full flex justify-start">
         <MenuIcon
           onClick={() => sethideSideBar(true)}
           className=" cursor-pointer"
         />
-      </div> */}
+      </div>
       <div className="flex items-center text-sm w-full rounded-md max-w-xs justify-evenly mt-5 bg-gray-200 p-3">
         {/* "PROJECT_DETAILS" | "BRANDING" | "CONFIG" */}
         <RightBarOptionComponent

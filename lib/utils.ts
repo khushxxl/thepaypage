@@ -5,6 +5,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+export const BASE_URL = "http://localhost:3000";
 export const codeText = `
     const postData = async (e: React.FormEvent) => {
     e.preventDefault();

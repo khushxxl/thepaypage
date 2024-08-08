@@ -65,7 +65,7 @@ function PreviewPage() {
   }, []);
 
   const fetchClientSecret = useCallback(
-    (stripeSecretKey: any, priceId: any) => {
+    (stripeSecretKey: any, priceId: any, projectId: any) => {
       // Create a Checkout Session
       return fetch("/api/checkout_sessions", {
         method: "POST",
@@ -75,6 +75,7 @@ function PreviewPage() {
         body: JSON.stringify({
           stripeSecretKey,
           priceId,
+          projectId,
         }),
       })
         .then((res) => res.json())
@@ -86,7 +87,8 @@ function PreviewPage() {
     if (userFound) {
       fetchClientSecret(
         userFound?.stripeSecretKey,
-        "price_1Pigq5CRmGYjmhYk5umwy394"
+        "price_1Pigq5CRmGYjmhYk5umwy394",
+        userFound?._id
       )
         .then((data) => setClientSecret(data))
         .catch(console.error);
@@ -107,10 +109,10 @@ function PreviewPage() {
               <Code color="black" />
             </div>
             <div className="mt-3">
-              <p className="font-bold text-4xl ">X Growth Guide</p>
+              <p className="font-bold text-4xl ">{userFound?.title}</p>
             </div>
             <div className="mt-3  mb-2">
-              <p className="font-bold text-lg ">100+ tips about growing on X</p>
+              <p className="font-bold text-lg ">{userFound?.tagline}</p>
             </div>
           </div>
           <div className="w-full relative  h-fit rounded-b-lg p-2 bg-white">
