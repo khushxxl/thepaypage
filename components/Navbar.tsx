@@ -76,15 +76,18 @@ function Navbar() {
           </Link>
         </div> */}
 
-        {selectedProject && pathName == "/dashboard" && (
-          <div
-            className=" border flex items-center space-x-2 p-2 rounded-md cursor-pointer"
-            onClick={postData}
-          >
-            <LinkIcon />
-            <p>Preview</p>
-          </div>
-        )}
+        <div className="flex items-center space-x-5">
+          {selectedProject && pathName == "/dashboard" && (
+            <div
+              className=" border flex items-center space-x-2 p-2 rounded-md cursor-pointer"
+              onClick={postData}
+            >
+              <LinkIcon />
+              <p>Preview</p>
+            </div>
+          )}
+          <UserButton />
+        </div>
       </div>
     );
   }

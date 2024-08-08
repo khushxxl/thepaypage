@@ -2,20 +2,22 @@ import React from "react";
 import { AvatarCirclesComponent } from "../ui/AvatarCircles";
 import Image from "next/image";
 import { descCopy } from "@/lib/utils";
+import SignupInput from "./SignupInput";
 
 function Hero() {
   return (
     <div className="flex  flex-col min-h-[80vh] justify-center w-full max-w-6xl">
       <div className="flex mt-14 lg:mt-0 flex-col lg:flex-row items-center w-full justify-between">
         <div className="space-y-5 flex flex-col items-center md:items-start text-center lg:text-left">
-          <h1 className="text-2xl  max-w-2xl lg:text-4xl  font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500">
+          <h1 className="text-4xl  max-w-2xl lg:text-5xl  font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500">
             Create Payment Integration with Beautiful Pages in 3 minutes
           </h1>
-          <h1 className="max-w-xs lg:max-w-lg text-md  font-semibold">
+          <h1 className="max-w-xs lg:max-w-lg text-md  font-semibold ">
             {descCopy}
           </h1>
-          <div>
+          <div className="w-full flex  items-center flex-col lg:items-start">
             <AvatarCirclesComponent />
+            <SignupInput />
           </div>
         </div>
         <div className="flex ml-[20px]">

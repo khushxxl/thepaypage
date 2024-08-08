@@ -62,5 +62,7 @@ export const instructions = [
   },
 ];
 
-export const descCopy =
-  "Integrating payments has always been a problem 😮‍💨, now integrate stripe with just few lines of code, no more api calls or code errors! Just that? No. Get a customizable page which you can design with our no-code designer 🪄";
+export const descCopy = `Integrating payments has always been a problem 😮‍💨, 
+  now integrate stripe with just no / few lines of code, no more api 
+or webhook calls! Just that? No. Get a customizable page which you can
+ design with our no-code designer and easily integrat into your projects 🪄`;
