@@ -38,6 +38,7 @@ function RightBar() {
     "bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500",
     "bg-black",
     "bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900",
+    "bg-[#FBE7F3]",
   ];
 
   useEffect(() => {
@@ -114,7 +115,7 @@ function RightBar() {
     );
   };
   return (
-    <div className="max-w-[480px] lg:w-full   flex items-start  flex-col h-full pl-5 pt-4">
+    <div className="max-w-[480px] lg:w-full   flex items-start  flex-col h-full pl-10 pt-4">
       {/* Options  */}
       <div className="w-full flex justify-start">
         <MenuIcon

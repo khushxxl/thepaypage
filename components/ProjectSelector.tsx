@@ -26,12 +26,14 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "./ui/button";
 import { Code } from "lucide-react";
+import { useUser } from "@clerk/nextjs";
 
 export function ProjectSelector() {
+  const { user } = useUser();
   const { allProjects, setallProjects, selectedProject, setselectedProject } =
     React.useContext(AppContext);
 
-  async function getUserByEmail(email: string) {
+  async function getUserByEmail(email: any) {
     const response = await fetch(
       `/api/getProject?email=${encodeURIComponent(email)}`
     );
@@ -43,15 +45,19 @@ export function ProjectSelector() {
     return userData;
   }
 
+  console.log("email from clerk", user?.emailAddresses[0].emailAddress);
+
   React.useEffect(() => {
-    getUserByEmail("khush@gmail.com")
-      .then((user) => {
-        setallProjects(user);
-        console.log("User Projects", user);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    if (!user) {
+      getUserByEmail("khushaal.choithramani@gmail.com")
+        .then((user) => {
+          setallProjects(user);
+          console.log("User Projects", user);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
   }, []);
 
   React.useEffect(() => {
@@ -65,26 +71,35 @@ export function ProjectSelector() {
           {selectedProject ? selectedProject?.title : " Select Project"}
         </Button>
       </DialogTrigger>
+
       <DialogContent className="sm:max-w-[500px]  flex flex-col  md:max-w-xl w-full">
-        <div className="grid grid-cols-4 w-full gap-x-5">
-          {allProjects?.map((data: any) => (
-            <div
-              className={`p-2 ${
-                selectedProject?._id === data?._id ? "bg-gray-300" : ""
-              } border cursor-pointer flex items-center flex-col rounded-xl p-4 `}
-              key={data._id} // Ensure you have a unique key
-              onClick={() => {
-                setselectedProject(data);
-                console.log("selected proj", data);
-              }}
-            >
-              <div className="border w-fit rounded-full bg-white p-3">
-                <Code color="black" />
+        <DialogTitle>All Projects</DialogTitle>
+        {allProjects?.length > 0 && (
+          <div className="grid grid-cols-4 w-full gap-x-5">
+            {allProjects?.map((data: any) => (
+              <div
+                className={`p-2 ${
+                  selectedProject?._id === data?._id ? "bg-gray-300" : ""
+                } border cursor-pointer flex items-center flex-col rounded-xl p-4 `}
+                key={data._id} // Ensure you have a unique key
+                onClick={() => {
+                  setselectedProject(data);
+                  console.log("selected proj", data);
+                }}
+              >
+                <div className="border w-fit rounded-full bg-white p-3">
+                  <Code color="black" />
+                </div>
+                <p className="mt-4"> {data?.title}</p>
               </div>
-              <p className="mt-4"> {data?.title}</p>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
+        {allProjects?.length == 0 && (
+          <div className="w-full text-center mt-10">
+            <p>No projects found</p>
+          </div>
+        )}
         <DialogFooter>
           <DialogClose>
             <Button>Close</Button>
