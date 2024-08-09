@@ -66,3 +66,9 @@ export const descCopy = `Integrating payments has always been a problem 😮‍�
   now integrate stripe with just no / few lines of code, no more api 
 or webhook calls! Just that? No. Get a customizable page which you can
  design with our no-code designer and easily integrat into your projects 🪄`;
+
+export const descCopy2 = `
+ Effortlessly integrate Stripe with minimal or no code 😮‍💨.
+   No API hassles, no webhook headaches.
+   Plus, design and customize your payment pages with our no-code designer to fit 
+   seamlessly into your projects. Start now and transform how you manage payments! 🪄`;
