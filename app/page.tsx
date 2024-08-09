@@ -1,5 +1,7 @@
 import Features from "@/components/landingPageComponents/Features";
+import Footer from "@/components/landingPageComponents/Footer";
 import Hero from "@/components/landingPageComponents/Hero";
+import SignupForm from "@/components/landingPageComponents/SignupForm";
 import { SignIn, SignInButton, useAuth, useUser } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,11 +16,10 @@ function HomePage() {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center max-w-[100%]  w-full mx-auto">
-      {/* Hero Section */}
       <Hero />
       <Features />
-
-      {/* Features */}
+      <SignupForm />
+      <Footer />
     </div>
   );
 }

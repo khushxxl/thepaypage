@@ -48,8 +48,8 @@ export function ProjectSelector() {
   console.log("email from clerk", user?.emailAddresses[0].emailAddress);
 
   React.useEffect(() => {
-    if (!user) {
-      getUserByEmail("khushaal.choithramani@gmail.com")
+    if (user) {
+      getUserByEmail(user?.emailAddresses[0].emailAddress)
         .then((user) => {
           setallProjects(user);
           console.log("User Projects", user);
@@ -58,7 +58,7 @@ export function ProjectSelector() {
           console.error(error);
         });
     }
-  }, []);
+  }, [user]);
 
   React.useEffect(() => {
     console.log(selectedProject?._id);

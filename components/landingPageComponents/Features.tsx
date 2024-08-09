@@ -22,6 +22,17 @@ function Features() {
         })}
       </div>
 
+      <div className="max-w-4xl flex items-center mt-20 justify-center w-full max-h-[500px] h-full">
+        <iframe
+          className="lg:w-[700px] lg:h-[400px] rounded-xl w-[400px] h-[250px]"
+          src="https://www.youtube.com/embed/vrkcWYVVZhw?si=_T47Y3XBIR3gdSFu?autoplay=1&allowfullscreen=1"
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerPolicy="strict-origin-when-cross-origin"
+          allowFullScreen
+        ></iframe>
+      </div>
+
       {/* <video width="500" height="500" controls preload="none">
         <source src="../../app/assets/thepaypagedemo.mp4" type="video/mp4" />
         Your browser does not support the video tag.
