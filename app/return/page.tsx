@@ -12,6 +12,8 @@ export default function Return() {
   const sessionId = urlParams.get("session_id");
   console.log(sessionId);
   // console.log(selectedProject);
+  const [isPaymentComplete, setisPaymentComplete] = useState<boolean>();
+  const [isPaymentOpen, setisPaymentOpen] = useState<boolean>();
   useEffect(() => {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -32,14 +34,20 @@ export default function Return() {
       console.log(data);
       setCustomerEmail(data?.customer_email);
       setStatus(data?.status);
+      if (data?.status === "paid" || data?.status === "completed") {
+        setisPaymentComplete(true);
+      }
+      if (data?.status === "open") {
+        setisPaymentOpen(true);
+      }
     });
   }, []);
 
-  if (status === "open") {
+  if (isPaymentOpen) {
     return redirect("/");
   }
 
-  if (status === "paid" || "completed") {
+  if (isPaymentComplete) {
     return (
       <section
         className="h-screen flex items-center justify-center"

@@ -68,7 +68,7 @@ export async function POST(req: Request) {
 
     console.log("user from webhook", user);
 
-    const newUser = await fetch("/api/create-user", {
+    const newUser: any = await fetch("/api/create-user", {
       method: "POST",
       body: JSON.stringify({ formdata: user }),
       headers: {
