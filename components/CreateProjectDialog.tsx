@@ -106,8 +106,8 @@ export function CreateProjectDialog() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="border-2 hover:bg-white bg-white text-black">
-          Create a new project
+        <Button className="border-2 hover:bg-white bg-white text-black font-semibold">
+          create a new project
         </Button>
       </DialogTrigger>
       {!isProjectCreated ? (

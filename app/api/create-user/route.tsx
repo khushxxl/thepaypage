@@ -7,7 +7,7 @@ export async function POST(req: NextRequest) {
     const data = body.formData;
     await User.create(data);
 
-    return NextResponse.json({ message: "Project Added" }, { status: 201 });
+    return NextResponse.json({ message: "User Added" }, { status: 201 });
   } catch (error) {
     return NextResponse.json(
       { message: "Error Occured", error },

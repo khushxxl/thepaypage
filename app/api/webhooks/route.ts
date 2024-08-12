@@ -68,7 +68,17 @@ export async function POST(req: Request) {
 
     console.log("user from webhook", user);
 
-    const newUser = await createUser(user);
+    const newUser = await fetch("/api/create-user", {
+      method: "POST",
+      body: JSON.stringify({ formdata: user }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!newUser.ok) {
+      return alert("Failed adding user to DB");
+    }
 
     if (newUser) {
       await clerkClient.users.updateUserMetadata(id, {

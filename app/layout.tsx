@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import AppContextProvider from "@/context/AppContext";
 import { Toaster } from "react-hot-toast";
 import { Analytics } from "@vercel/analytics/react";
+// import "@uploadthing/react/styles.css";
 
 import {
   ClerkProvider,
@@ -14,6 +15,7 @@ import {
   UserButton,
 } from "@clerk/nextjs";
 import Head from "next/head";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -28,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en">
+      <html lang="en" suppressHydrationWarning>
         <Head>
           <meta
             name="twitter:card"

@@ -123,7 +123,7 @@ function Navbar() {
           <Link href={"/dashboard"}>
             <p className="underline">Dashboard</p>
           </Link>
-          <UserButton />
+          {isSignedIn ? <UserButton /> : <SignInButton />}
         </div>
       </div>
     );

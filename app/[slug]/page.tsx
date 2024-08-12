@@ -1,6 +1,7 @@
 "use client";
 import BrandingComponent from "@/components/BrandingComponent";
 import CheckoutForm from "@/components/CheckoutForm";
+import { AppContext } from "@/context/AppContext";
 import convertToSubcurrency from "@/lib/convertToSubcurrency";
 import {
   Elements,
@@ -11,11 +12,13 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Code } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 
 function PreviewPage() {
   const [userFound, setuserFound] = useState<any>();
   const [postData, setpostData] = useState<any>();
+  const { bannerbgColor, showBranding, textColorAccent, bgColor } =
+    useContext(AppContext);
 
   const searchParams = useSearchParams();
   const userId = searchParams.get("clientId");
@@ -102,11 +105,23 @@ function PreviewPage() {
 
     const stripePromise = loadStripe(userFound?.stripePublicKey);
     return (
-      <div className=" w-full lg:p-10 bg-gradient-to-r from-indigo-200 via-red-200 to-yellow-100  justify-center items-center">
-        <div className="w-full max-w-5xl mx-auto rounded-xl ">
-          <div className="flex  bg-[#FBE7F3]  text-black border-4 rounded-xl items-center w-full justify-center flex-col  ">
-            <div className="border mt-4 rounded-full bg-white p-3">
-              <Code color="black" />
+      <div className={`w-full lg:p-10 ${bgColor}  justify-center items-center`}>
+        <div
+          style={{ color: textColorAccent }}
+          className="w-full max-w-5xl mx-auto rounded-xl border "
+        >
+          <div
+            className={`flex  ${bannerbgColor}  border-4 rounded-xl items-center w-full justify-center flex-col `}
+          >
+            <div className="mt-5">
+              <img
+                alt=""
+                height={50}
+                width={50}
+                className="rounded-full"
+                style={{}}
+                src={userFound?.logo}
+              />
             </div>
             <div className="mt-3">
               <p className="font-bold text-4xl ">{userFound?.title}</p>
@@ -120,7 +135,7 @@ function PreviewPage() {
               <EmbeddedCheckout />
             </EmbeddedCheckoutProvider>
           </div>
-          <BrandingComponent />
+          {showBranding && <BrandingComponent />}
         </div>
       </div>
     );

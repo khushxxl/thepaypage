@@ -12,6 +12,11 @@ function AppContextProvider({ children }) {
   const [bgColor, setbgColor] = useState();
   const [bannerbgColor, setbannerbgColor] = useState("bg-[#FBE7F3]");
   const [textColorAccent, settextColorAccent] = useState("#111111");
+  const [showEmailEditor, setshowEmailEditor] = useState(false);
+
+  const [showBranding, setshowBranding] = useState(true);
+
+  const [emailGreetingText, setemailGreetingText] = useState("Hey XYZ");
   return (
     <AppContext.Provider
       value={{
@@ -29,6 +34,10 @@ function AppContextProvider({ children }) {
         setbannerbgColor,
         hideSideBar,
         sethideSideBar,
+        showBranding,
+        setshowBranding,
+        showEmailEditor,
+        setshowEmailEditor,
       }}
     >
       {children}

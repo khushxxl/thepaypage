@@ -22,6 +22,7 @@ import Image from "next/image";
 import StripePaymentCustom from "./StripePaymentCustom";
 import Link from "next/link";
 import BrandingComponent from "./BrandingComponent";
+import EmailTemplate from "@/app/emails";
 
 function EditorArea() {
   const {
@@ -35,6 +36,10 @@ function EditorArea() {
     settextColorAccent,
     bannerbgColor,
     setbannerbgColor,
+    showBranding,
+    setshowBranding,
+    showEmailEditor,
+    setshowEmailEditor,
   } = React.useContext(AppContext);
 
   const amount = 49.99;
@@ -59,37 +64,6 @@ function EditorArea() {
 
     loadStripeInstance();
   }, [selectedProject]);
-
-  const fetchClientSecret = useCallback(
-    (stripeSecretKey: any, priceId: any) => {
-      // Create a Checkout Session
-      return fetch("/api/checkout_sessions", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          stripeSecretKey,
-          priceId,
-        }),
-      })
-        .then((res) => res.json())
-        .then((data) => data.clientSecret);
-    },
-    [] // Empty dependency array since fetchClientSecret does not depend on any external state or props
-  );
-  // useEffect(() => {
-  //   if (selectedProject) {
-  //     fetchClientSecret(
-  //       selectedProject?.stripeSecretKey,
-  //       "price_1Pigq5CRmGYjmhYk5umwy394"
-  //     )
-  //       .then((data) => setClientSecret(data))
-  //       .catch(console.error);
-  //   }
-  // }, [selectedProject, fetchClientSecret]);
-
-  const options = { clientSecret };
 
   const [chosenView, setchosenView] = useState<"preview" | "codeview">(
     "preview"
@@ -117,24 +91,35 @@ function EditorArea() {
         className={`max-w-5xl  w-full border ${bgColor} flex p-10 flex-col items-center rounded-xl`}
       >
         {/* Top */}
-        <div
-          style={{ color: textColorAccent }}
-          className={`flex ${bannerbgColor} bg-[#FBE7F3] border-4  max-w-5xl rounded-b-none   rounded items-center w-full justify-center flex-col p-4`}
-        >
-          <div className="border mt-10 rounded-full bg-white p-3">
-            <Code color="black" />
+        <div className="w-full border flex flex-col items-center">
+          <div
+            style={{ color: textColorAccent }}
+            className={`flex ${bannerbgColor} bg-[#FBE7F3] border-4  max-w-5xl rounded-b-none   rounded items-center w-full justify-center flex-col p-4`}
+          >
+            <div className=" h-[100px] w-[100px] flex items-center justify-center rounded-full">
+              <img
+                alt=""
+                className=" h-full w-full object-cover rounded-full"
+                style={{}}
+                src={selectedProject?.logo}
+              />
+            </div>
+            <div className="">
+              <p className="font-bold text-4xl mt-3">
+                {selectedProject?.title}
+              </p>
+            </div>
+            <div>
+              <p className="font-bold text-xl mt-3">
+                {selectedProject?.tagline}
+              </p>
+            </div>
           </div>
-          <div className="">
-            <p className="font-bold text-4xl mt-3">{selectedProject?.title}</p>
-          </div>
-          <div>
-            <p className="font-bold text-xl mt-3">{selectedProject?.tagline}</p>
-          </div>
-        </div>
 
-        <div className="w-full h-full ">
-          <StripePaymentCustom />
-          <BrandingComponent />
+          <div className="w-full h-full ">
+            <StripePaymentCustom />
+            {showBranding && <BrandingComponent />}
+          </div>
         </div>
       </div>
     );
@@ -169,17 +154,39 @@ function EditorArea() {
 
   return (
     <div className={`flex items-center flex-col `}>
-      {selectedProject ? (
-        <>
-          <div className="mt-5 mb-5">
-            <PreviewSwitcher />
+      {/* {!showEmailEditor ? (
+        selectedProject ? (
+          <>
+            <div className="mt-5 mb-5">
+              <PreviewSwitcher />
+            </div>
+            {chosenView == "preview" ? <Preview /> : <CodeView />}
+          </>
+        ) : (
+          <div className="flex max-w-full w-full justify-center items-center flex-col pt-20">
+            <CircleHelp />
+            <p className="font-semibold text-xl mt-3">no project is selected</p>
           </div>
-          {chosenView == "preview" ? <Preview /> : <CodeView />}
-        </>
+        )
+      ) : (
+        <EmailTemplate userFirstname={""} />
+      )} */}
+
+      {selectedProject ? (
+        !showEmailEditor ? (
+          <>
+            <div className="mt-5 mb-5">
+              <PreviewSwitcher />
+            </div>
+            {chosenView == "preview" ? <Preview /> : <CodeView />}
+          </>
+        ) : (
+          <EmailTemplate userFirstname={""} />
+        )
       ) : (
         <div className="flex max-w-full w-full justify-center items-center flex-col pt-20">
           <CircleHelp />
-          <p className="font-semibold text-xl mt-3">No Project Selected</p>
+          <p className="font-semibold text-xl mt-3">no project is selected</p>
         </div>
       )}
     </div>

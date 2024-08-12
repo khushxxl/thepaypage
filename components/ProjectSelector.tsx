@@ -67,8 +67,8 @@ export function ProjectSelector() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="border-2 hover:bg-white bg-white text-black">
-          {selectedProject ? selectedProject?.title : " Select Project"}
+        <Button className="border-2 hover:bg-white bg-white text-black font-semibold">
+          {selectedProject ? selectedProject?.title : "select project"}
         </Button>
       </DialogTrigger>
 

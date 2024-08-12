@@ -7,32 +7,24 @@ import { useUser } from "@clerk/nextjs";
 import { MenuIcon } from "lucide-react";
 import Image from "next/image";
 import { useContext, useEffect } from "react";
+import EmailTemplate from "../emails";
 
 export default function Home() {
   const { user } = useUser();
 
-  const { hideSideBar, sethideSideBar } = useContext(AppContext);
+  const { hideSideBar, sethideSideBar, showEmailEditor, setshowEmailEditor } =
+    useContext(AppContext);
   console.log(user);
   return (
-    <main className="flex flex-col h-full lg:flex-row  items-center w-full  md:items-start min-h-screen">
-      {hideSideBar && (
-        <div className=" ml-5 mt-5">
-          <MenuIcon
-            onClick={() => sethideSideBar(!hideSideBar)}
-            className=" cursor-pointer"
-          />
-        </div>
-      )}
-
-      {/* <div className="hidden xl:flex h-full lg:col-span-1">
-        <LeftSideBar />
-      </div> */}
+    <main className="flex items-center w-full flex-col lg:flex-row  md:items-start min-h-screen ">
       {!hideSideBar && (
-        <div className=" h-full w-full lg:border-r-2 lg:w-[35%] 2xl:w-[30%]">
+        <div className=" h-full min-h-[120vh] lg:border-r-2  w-full lg:w-[35%] 2xl:w-[25%]">
           <RightBar />
         </div>
       )}
       <div className="w-full">
+        {/* <EmailTemplate userFirstname={""} /> */}
+        {/* {!showEmailEditor ? <EditorArea /> : <EmailTemplate userFirstname="" />} */}
         <EditorArea />
       </div>
     </main>
